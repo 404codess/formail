@@ -31,7 +31,6 @@ CSRF_TRUSTED_ORIGINS = ['https://formail.vercel.app']
 
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
